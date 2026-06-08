@@ -34,6 +34,5 @@ So, why not build the simulation to reflect reality? That's how the idea for thi
 - **Web Speech API**: Integrated for dynamic text-to-speech audio generation.
 
 ## AUTHOR : HCK 👩🏻‍💻
-
 ---
 *Designed to bridge the gap between textbook theory and modern clinical practice.*
