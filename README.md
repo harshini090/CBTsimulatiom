@@ -33,11 +33,7 @@ So, why not build the simulation to reflect reality? That's how the idea for thi
 - **Glassmorphism UI**: A modern aesthetic for overlays and HUDs to give it a premium, polished feel.
 - **Web Speech API**: Integrated for dynamic text-to-speech audio generation.
 
-## 🚀 How to Run
-
-Zero friction. There are no databases to set up, no dependencies to install, and no servers to configure. It is a fully client-side experience. 
-
-Simply open the `index.html` file in any modern web browser to start the simulation!
+## AUTHOR : HCK 👩🏻‍💻
 
 ---
 *Designed to bridge the gap between textbook theory and modern clinical practice.*
