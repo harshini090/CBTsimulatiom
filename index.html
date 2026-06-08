@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBT Simulation: Sarah</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Start Screen -->
+  <div id="start-screen" class="overlay">
+    <div class="card">
+      <h1>Simulation Module: CBT Basics</h1>
+      <p>Patient: Sarah (Anxiety & Work Stress)</p>
+      <button id="btn-start" class="btn primary">Start Module</button>
+    </div>
+  </div>
+
+  <!-- Tour Overlay -->
+  <div id="tour-overlay" class="overlay glass hidden" style="z-index: 200;">
+    <div class="card">
+      <h2>Quick Tour</h2>
+      <ul class="tour-list">
+        <li><strong>Video Call:</strong> You will act as the therapist in this simulated video call.</li>
+        <li><strong>Interactive Decisions:</strong> The session will pause at key moments. You must select the best CBT response to continue.</li>
+        <li><strong>Manual Advance:</strong> The dialogue goes line by line and cannot be reversed. Press <strong>Spacebar</strong>, <strong>Right Arrow</strong>, or the <strong>Next</strong> button to advance.</li>
+        <li><strong>Audio Controls:</strong> <strong>Pause</strong> to freeze time, or <strong>Mute</strong> if you find the audio distracting.</li>
+        <li><strong>Live Transcript:</strong> Click "Transcript" in the bottom menu to review the conversation history at any time.</li>
+      </ul>
+      <button id="btn-begin-sim" class="btn primary">Begin Simulation</button>
+    </div>
+  </div>
+
+  <!-- Main Call UI -->
+  <div id="call-ui" class="hidden">
+    <header class="call-header">
+      <div class="session-info">Session Time: <span id="time-display">00:00</span></div>
+      <div class="progress-container">
+        <div class="progress-label">Simulation Progress: <span id="progress-text">0%</span></div>
+        <div class="progress-bar-bg">
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+      </div>
+      <div class="session-title">Encrypted Video Call</div>
+    </header>
+
+    <div class="main-layout">
+      <main class="video-grid">
+        <!-- Therapist Video -->
+        <div id="therapist-container" class="video-container">
+          <img src="therapist.jpg" alt="Therapist Video Feed" class="video-feed">
+          <div class="video-overlay">
+            <span class="name-tag">Therapist (You)</span>
+            <div class="audio-wave">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Patient Video -->
+        <div id="patient-container" class="video-container">
+          <img src="sarah.jpg" alt="Patient Video Feed" class="video-feed">
+          <div class="video-overlay">
+            <span class="name-tag">Sarah</span>
+            <div class="audio-wave">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Transcript Side Panel -->
+      <aside id="transcript-panel" class="hidden">
+        <div class="transcript-header">
+          <h3>Session Transcript</h3>
+          <button id="btn-close-transcript" class="btn-icon">×</button>
+        </div>
+        <div id="transcript-content" class="transcript-content">
+          <!-- Populated dynamically -->
+        </div>
+      </aside>
+    </div>
+
+    <footer class="call-footer">
+      <button id="btn-mute" class="btn secondary icon-btn" title="Mute Audio">🔊 Mute</button>
+      <button id="btn-pause" class="btn secondary icon-btn" title="Pause Session">⏸ Pause</button>
+      <button id="btn-toggle-transcript" class="btn secondary icon-btn" title="View Transcript">📄 Transcript</button>
+      <button id="btn-next" class="btn primary" title="Next (Space / Arrow Right)">Next ⏭</button>
+    </footer>
+  </div>
+
+  <!-- Glassmorphic Quiz HUD -->
+  <div id="hud-overlay" class="overlay glass hidden">
+    <div class="hud-card">
+      <h2 id="hud-title">Response Required</h2>
+      <p id="hud-prompt">What is your response to Sarah?</p>
+      <div id="hud-options" class="options-container">
+        <!-- Options generated via JS -->
+      </div>
+      <button id="btn-submit-hud" class="btn primary mt-4 hidden">Submit Response</button>
+    </div>
+  </div>
+
+  <!-- Final Score / Reflection Screen -->
+  <div id="final-screen" class="overlay glass hidden">
+    <div class="card wide-card final-scrollable">
+      <h2>Session Complete</h2>
+      <p id="final-feedback">You successfully helped Sarah challenge her rigid beliefs.</p>
+      
+      <div id="final-assessment" class="final-assessment">
+        <!-- Final Assessment questions injected here -->
+      </div>
+
+      <div class="reflection-section">
+        <label for="reflection-pad">Student Clinical Reflection Notes</label>
+        <textarea id="reflection-pad" rows="4" placeholder="Type your professional takeaways from this session here..."></textarea>
+      </div>
+      
+      <button class="btn primary" onclick="window.print()">Save Transcript</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
