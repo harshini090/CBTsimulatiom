@@ -33,6 +33,6 @@ So, why not build the simulation to reflect reality? That's how the idea for thi
 - **Glassmorphism UI**: A modern aesthetic for overlays and HUDs to give it a premium, polished feel.
 - **Web Speech API**: Integrated for dynamic text-to-speech audio generation.
 
-## AUTHOR : HCK 👩🏻‍💻
+## 👩🏻‍💻 AUTHOR : HCK 
 
 *Designed to bridge the gap between textbook theory and modern clinical practice.*
