@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CBT Simulation: Sarah</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
 </head>
 <body>
   <!-- Start Screen -->
@@ -16,10 +17,13 @@
     </div>
   </div>
 
-  <!-- Tour Overlay -->
-  <div id="tour-overlay" class="overlay glass hidden" style="z-index: 200;">
-    <div class="card">
-      <h2>Quick Tour</h2>
+  <!-- Controls Side Panel -->
+  <aside id="controls-panel" class="side-panel hidden">
+    <div class="panel-header">
+      <h2>Controls Cheat Sheet</h2>
+      <button id="btn-close-controls" class="btn-icon">×</button>
+    </div>
+    <div class="panel-content">
       <ul class="tour-list">
         <li><strong>Video Call:</strong> You will act as the therapist in this simulated video call.</li>
         <li><strong>Interactive Decisions:</strong> The session will pause at key moments. You must select the best CBT response to continue.</li>
@@ -27,9 +31,8 @@
         <li><strong>Audio Controls:</strong> <strong>Pause</strong> to freeze time, or <strong>Mute</strong> if you find the audio distracting.</li>
         <li><strong>Live Transcript:</strong> Click "Transcript" in the bottom menu to review the conversation history at any time.</li>
       </ul>
-      <button id="btn-begin-sim" class="btn primary">Begin Simulation</button>
     </div>
-  </div>
+  </aside>
 
   <!-- Main Call UI -->
   <div id="call-ui" class="hidden">
@@ -45,37 +48,7 @@
     </header>
 
     <div class="main-layout">
-      <main class="video-grid">
-        <!-- Therapist Video -->
-        <div id="therapist-container" class="video-container">
-          <img src="therapist.jpg" alt="Therapist Video Feed" class="video-feed">
-          <div class="video-overlay">
-            <span class="name-tag">Therapist (You)</span>
-            <div class="audio-wave">
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Patient Video -->
-        <div id="patient-container" class="video-container">
-          <img src="sarah.jpg" alt="Patient Video Feed" class="video-feed">
-          <div class="video-overlay">
-            <span class="name-tag">Sarah</span>
-            <div class="audio-wave">
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <!-- Transcript Side Panel -->
+      <!-- Transcript Side Panel (moved to left) -->
       <aside id="transcript-panel" class="hidden">
         <div class="transcript-header">
           <h3>Session Transcript</h3>
@@ -85,26 +58,61 @@
           <!-- Populated dynamically -->
         </div>
       </aside>
+
+      <div class="video-area" style="position: relative; flex: 1; display: flex; flex-direction: column;">
+        <main class="video-grid">
+          <!-- Therapist Video -->
+          <div id="therapist-container" class="video-container">
+            <img src="therapist.jpg" alt="Therapist Video Feed" class="video-feed">
+            <div class="video-overlay">
+              <span class="name-tag">Therapist (You)</span>
+              <div class="audio-wave">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Patient Video -->
+          <div id="patient-container" class="video-container">
+            <img id="patient-video" src="sarah.jpg" alt="Patient Video Feed" class="video-feed">
+            <div class="video-overlay">
+              <span class="name-tag">Sarah</span>
+              <span id="patient-mood-badge" class="mood-badge hidden">Mood: Neutral</span>
+              <div class="audio-wave">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Glassmorphic Quiz HUD -->
+        <div id="hud-overlay" class="overlay glass hidden">
+          <div class="hud-card">
+            <h2 id="hud-title">Response Required</h2>
+            <p id="hud-prompt">What is your response to Sarah?</p>
+            <div id="hud-options" class="options-container">
+              <!-- Options generated via JS -->
+            </div>
+            <button id="btn-submit-hud" class="btn primary mt-4 hidden">Submit Response</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer class="call-footer">
+      <button id="btn-controls" class="btn secondary icon-btn" title="View Controls">ℹ️ Controls</button>
       <button id="btn-mute" class="btn secondary icon-btn" title="Mute Audio">🔊 Mute</button>
       <button id="btn-pause" class="btn secondary icon-btn" title="Pause Session">⏸ Pause</button>
       <button id="btn-toggle-transcript" class="btn secondary icon-btn" title="View Transcript">📄 Transcript</button>
+      <button id="btn-prev" class="btn secondary" title="Previous Node">⏮ Previous</button>
       <button id="btn-next" class="btn primary" title="Next (Space / Arrow Right)">Next ⏭</button>
     </footer>
-  </div>
-
-  <!-- Glassmorphic Quiz HUD -->
-  <div id="hud-overlay" class="overlay glass hidden">
-    <div class="hud-card">
-      <h2 id="hud-title">Response Required</h2>
-      <p id="hud-prompt">What is your response to Sarah?</p>
-      <div id="hud-options" class="options-container">
-        <!-- Options generated via JS -->
-      </div>
-      <button id="btn-submit-hud" class="btn primary mt-4 hidden">Submit Response</button>
-    </div>
   </div>
 
   <!-- Final Score / Reflection Screen -->
@@ -126,6 +134,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

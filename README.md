@@ -1,18 +1,35 @@
-# 🧠 CBT Telehealth Simulator
+# Interactive CBT Therapy Simulation
 
-> An immersive, interactive Cognitive Behavioral Therapy (CBT) training simulation built into a modern, post-pandemic telehealth interface.
+A state-of-the-art interactive web simulation of a Cognitive Behavioral Therapy (CBT) session. This project provides a realistic, branch-based dialogue system where users act as a clinical supervisor or student observing and guiding a therapy session with a patient named Sarah.
 
----
+## Features & Enhancements
 
-## 💡 The Spark of Inspiration
+This project has been extensively upgraded with premium UI/UX features and dynamic interactions:
 
-When I was first asked to design a simulation for a clinical therapy scenario, I brainstormed dozens of different approaches. Gamified branching paths? A standard quiz format? A clinical dashboard?
+### 🌟 Premium UI / UX
+* **Interactive Guided Tour:** Uses `driver.js` to provide an automatic, step-by-step spotlight tour of the interface when the module starts.
+* **Glassmorphic Design:** Sleek, modern styling featuring frosted glass overlays for the quizzes, controls cheat-sheet, and transcript panels.
+* **Smooth Animations:** Side panels smoothly slide in and out of the view. The live transcript features a sophisticated fade-in animation exclusively for the newest, ongoing dialogue while maintaining instant rendering for historical messages.
+* **Unobtrusive Overlays:** The transcript panel is docked cleanly to the left so it remains readable even while answering quizzes.
 
-None of them felt quite right.
+### 🧠 Dynamic AI Avatars & Mood Tracking
+* **Live Mood Tracking:** A dynamic mood badge on the patient's video feed actively tracks and displays the patient's emotional state (e.g., *Anxious*, *Relieved*, *Vulnerable*, *Empathetic*).
+* **Contextual Expressions:** Characters dynamically change their facial expressions based on the dialogue context. The project utilizes a library of AI-generated expressions (e.g., disappointed, irritated, hesitant, kind).
+* **Smart State Retention:** The patient's emotional expression visually persists in the UI even while the therapist is speaking, providing realistic emotional continuity. 
+* **Dynamic Talking Loops:** The therapist's video feed loops through specifically generated active speaking expressions (warm, serious, standard) during their turn, rather than defaulting to static or listening faces.
 
-Then, a thought clicked. In a post-COVID world, the landscape of therapy has fundamentally changed. The traditional "couch in a quiet room" has largely been replaced by webcams, headsets, and screen grids. **Most therapy sessions today happen online.** 
+### 🎮 Robust Navigation & Quiz Flow
+* **Non-Linear Navigation:** Fully functional "Previous" and "Next" buttons allow students to navigate backward and forward through the conversation. The transcript accurately rebuilds itself dynamically based on the current history point.
+* **Enhanced Quizzes:** 
+  * Options are neatly labeled (A, B, C, D) with inline feedback directly underneath selected choices.
+  * Successful answers provide dual branching options: "Try Again" (to explore other feedback) or "Continue".
+  * Navigation buttons gracefully suspend and bypass the quiz overlay if the user decides to navigate away.
 
-So, why not build the simulation to reflect reality? That's how the idea for this project was born: an interactive clinical simulation wrapped entirely inside a sleek, secure video call interface. It immerses the student in the exact environment they'll be working in, making the training immediately relevant and engaging.
+## Getting Started
+
+1. Clone the repository.
+2. Serve the directory using any local web server (e.g., `python3 -m http.server 8081`).
+3. Open `index.html` in your browser to begin the simulation.
 
 ## ✨ Features & Experience
 
