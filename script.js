@@ -109,7 +109,7 @@ const scenario = {
     },
 
     t16: { type: 'therapist', speaker: 'Therapist', text: "That’s an important insight. We’ll continue working on challenging those perfectionistic beliefs next session.", audioPath: 'audio/t16.mp3', next: 'p16' },
-    p16: { type: 'patient', speaker: 'Sarah', text: "Thank you. This actually feels helpful.", audioPath: 'audio/p16.mp3', image: 'sarah_relieved.jpg', moodText: 'Hopeful', next: 't17' },
+    p16: { type: 'patient', speaker: 'Sarah', text: "Thank you. This actually feels helpful.", audioPath: 'audio/p16.mp3', image: 'sarah_smiling.jpg', moodText: 'Hopeful', next: 't17' },
     t17: { type: 'therapist', speaker: 'Therapist', text: "I’m glad to hear that. See you next week.", audioPath: 'audio/t17.mp3', image: 'therapist_smiling.jpg', next: 'end' }
   }
 };
@@ -499,20 +499,33 @@ function playNode(nodeId) {
   updateProgress(nodeId);
   els.hudOverlay.classList.add('hidden');
 
-  // Update patient image and mood badge
-  if (node.type === 'patient') {
-    if (node.image && els.patientVideo) {
-      els.patientVideo.src = node.image;
+  // Update patient image and mood badge to reflect the correct historical state
+  let activePatientNode = node.type === 'patient' ? node : null;
+  if (!activePatientNode) {
+    for (let i = nodeHistory.length - 1; i >= 0; i--) {
+      if (scenario.nodes[nodeHistory[i]] && scenario.nodes[nodeHistory[i]].type === 'patient') {
+        activePatientNode = scenario.nodes[nodeHistory[i]];
+        break;
+      }
+    }
+  }
+
+  if (activePatientNode) {
+    if (activePatientNode.image && els.patientVideo) {
+      els.patientVideo.src = activePatientNode.image;
     } else if (els.patientVideo) {
       els.patientVideo.src = 'sarah.jpg';
     }
 
-    if (node.moodText && els.patientMoodBadge) {
-      els.patientMoodBadge.textContent = `Mood: ${node.moodText}`;
+    if (activePatientNode.moodText && els.patientMoodBadge) {
+      els.patientMoodBadge.textContent = `Mood: ${activePatientNode.moodText}`;
       els.patientMoodBadge.classList.remove('hidden');
     } else if (els.patientMoodBadge) {
       els.patientMoodBadge.classList.add('hidden');
     }
+  } else {
+    if (els.patientVideo) els.patientVideo.src = 'sarah.jpg';
+    if (els.patientMoodBadge) els.patientMoodBadge.classList.add('hidden');
   }
 
   // Loop therapist images for therapist dialogue
