@@ -20,16 +20,37 @@
   <!-- Controls Side Panel -->
   <aside id="controls-panel" class="side-panel hidden">
     <div class="panel-header">
-      <h2>Controls Cheat Sheet</h2>
+      <h2>Navigation & Controls Guide</h2>
       <button id="btn-close-controls" class="btn-icon">×</button>
     </div>
     <div class="panel-content">
-      <ul class="tour-list">
-        <li><strong>Video Call:</strong> You will act as the therapist in this simulated video call.</li>
-        <li><strong>Interactive Decisions:</strong> The session will pause at key moments. You must select the best CBT response to continue.</li>
-        <li><strong>Manual Advance:</strong> The dialogue goes line by line and cannot be reversed. Press <strong>Spacebar</strong>, <strong>Right Arrow</strong>, or the <strong>Next</strong> button to advance.</li>
-        <li><strong>Audio Controls:</strong> <strong>Pause</strong> to freeze time, or <strong>Mute</strong> if you find the audio distracting.</li>
-        <li><strong>Live Transcript:</strong> Click "Transcript" in the bottom menu to review the conversation history at any time.</li>
+      <ul class="tour-list" style="list-style: none; padding-left: 0;">
+        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
+          <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">ℹ️ Controls</button>
+          <div><strong>Navigation & Controls Guide:</strong> Click this button to reopen this cheat sheet at any time.</div>
+        </li>
+        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
+          <div style="display: flex; gap: 5px;">
+            <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">🔊 Mute</button>
+            <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">⏸ Pause</button>
+          </div>
+          <div><strong>Audio Controls:</strong> Mute the voice generation if you find it distracting, or Pause the simulation to freeze the timer and dialogue.</div>
+        </li>
+        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
+          <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">📄 Transcript</button>
+          <div><strong>Live Transcript:</strong> Click to view the full conversation history. It updates automatically in real-time.</div>
+        </li>
+        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
+          <div style="display: flex; gap: 5px;">
+            <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">⏮ Previous</button>
+            <button class="btn primary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">Next ⏭</button>
+          </div>
+          <div><strong>Manual Navigation:</strong> The dialogue advances manually. Click these buttons (or use Spacebar/Arrow Keys) to step forward or backward through the session.</div>
+        </li>
+        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
+          <button class="btn primary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">Submit Response</button>
+          <div><strong>Interactive Decisions:</strong> At key clinical moments, the session will pause. You must select the best CBT response to continue.</div>
+        </li>
       </ul>
     </div>
   </aside>
