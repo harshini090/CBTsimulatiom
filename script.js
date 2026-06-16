@@ -138,6 +138,7 @@ const els = {
   startScreen: document.getElementById('start-screen'),
   introScreen: document.getElementById('intro-screen'),
   assessmentScreen: document.getElementById('assessment-screen'),
+  controlsPanel: document.getElementById('controls-panel'),
   btnContinueIntro: document.getElementById('btn-continue-intro'),
   btnCloseControls: document.getElementById('btn-close-controls'),
   callUI: document.getElementById('call-ui'),
