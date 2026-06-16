@@ -663,6 +663,35 @@ function showChoices(node) {
 
     checkboxes.forEach(i => i.cb.disabled = true);
 
+    const isFullyCorrect = allCorrectSelected && !anyIncorrectSelected;
+
+    const overallFb = document.createElement('div');
+    overallFb.className = isFullyCorrect ? 'feedback-text success' : 'feedback-text error';
+    overallFb.style.fontWeight = 'bold';
+    overallFb.style.marginTop = '1rem';
+    overallFb.style.textAlign = 'center';
+    
+    if (isMultiSelect) {
+      overallFb.textContent = isFullyCorrect 
+        ? "Correct! You identified all the appropriate responses." 
+        : "Incorrect. You must select all correct options and no incorrect ones.";
+    } else {
+      overallFb.textContent = isFullyCorrect 
+        ? "Correct!" 
+        : "Incorrect. Please review the feedback.";
+    }
+    els.hudOptions.appendChild(overallFb);
+
+    if (isFullyCorrect) {
+      els.btnSubmitHud.textContent = 'Continue';
+      els.btnSubmitHud.onclick = () => {
+        els.hudOverlay.classList.add('hidden');
+        isGoingBack = false;
+        playNode(node.nextNode);
+      };
+      return;
+    }
+
     els.btnSubmitHud.textContent = 'Try Again';
     els.btnSubmitHud.classList.replace('primary', 'secondary');
 
