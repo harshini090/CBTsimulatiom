@@ -66,8 +66,10 @@ const scenario = {
       type: 'choice',
       prompt: "How could you potentially respond to this client’s reaction with an effective CBT response?",
       options: [
-        { text: "That history can shape automatic beliefs. Let’s try reframing the original thought. Instead of 'I’m terrible at my job,' what might be a more balanced statement?", isCorrect: true, feedback: "This explores cognitive rules and assumptions to help restructure the thought." },
-        { text: "You are being too hard on yourself.", isCorrect: false, feedback: "This response does not challenge the rigid belief system effectively." }
+        { text: "That history can shape automatic beliefs. Let’s try reframing the original thought. Instead of 'I’m terrible at my job,' what might be a more balanced statement?", isCorrect: true, feedback: "This explores cognitive rules and assumptions." },
+        { text: "You are being too hard on yourself.", isCorrect: false, feedback: "This does not challenge the rigid belief system." },
+        { text: "What makes it harder to apply the same standard to yourself?", isCorrect: true, feedback: "This encourages balanced thinking." },
+        { text: "What might be a more balanced definition of success?", isCorrect: true, feedback: "This explores cognitive rules and assumptions." }
       ],
       nextNode: 't11'
     },
@@ -134,7 +136,9 @@ let isGoingBack = false;
 // DOM Elements
 const els = {
   startScreen: document.getElementById('start-screen'),
-  controlsPanel: document.getElementById('controls-panel'),
+  introScreen: document.getElementById('intro-screen'),
+  assessmentScreen: document.getElementById('assessment-screen'),
+  btnContinueIntro: document.getElementById('btn-continue-intro'),
   btnCloseControls: document.getElementById('btn-close-controls'),
   callUI: document.getElementById('call-ui'),
   hudOverlay: document.getElementById('hud-overlay'),
@@ -166,10 +170,10 @@ const els = {
 };
 
 const therapistTalkingImages = ['therapist_speaking.jpg', 'therapist_talking_warm.jpg', 'therapist_talking_serious.jpg'];
-let therapistImageIndex = 0;
 
 // Initialize
-els.btnStart.addEventListener('click', startTour);
+els.btnStart.addEventListener('click', showIntroScreen);
+els.btnContinueIntro.addEventListener('click', startTour);
 els.btnControls.addEventListener('click', () => toggleControlsPanel(els.controlsPanel.classList.contains('hidden')));
 els.btnCloseControls.addEventListener('click', () => toggleControlsPanel(false));
 els.btnPause.addEventListener('click', togglePause);
@@ -181,17 +185,28 @@ els.btnPrev.addEventListener('click', advancePrevious);
 
 document.addEventListener('keydown', (e) => {
   if (!els.startScreen.classList.contains('hidden')) return;
-  if (!els.hudOverlay.classList.contains('hidden')) return;
+  if (!els.introScreen.classList.contains('hidden')) return;
   if (!els.finalScreen.classList.contains('hidden')) return;
 
-  if (e.code === 'Space' || e.code === 'ArrowRight') {
+  if (e.code === 'ArrowRight') {
     e.preventDefault();
     advanceNext();
+  } else if (e.code === 'ArrowLeft') {
+    e.preventDefault();
+    advancePrevious();
+  } else if (e.code === 'Space') {
+    e.preventDefault();
+    togglePause();
   }
 });
 
-function startTour() {
+function showIntroScreen() {
   els.startScreen.classList.add('hidden');
+  els.introScreen.classList.remove('hidden');
+}
+
+function startTour() {
+  els.introScreen.classList.add('hidden');
   els.callUI.classList.remove('hidden');
 
   const driverObj = window.driver.js.driver({
@@ -204,10 +219,10 @@ function startTour() {
       { element: '.video-area', popover: { title: 'Video Call', description: 'This is the simulated video call with Sarah. She will react dynamically to your choices.', side: "left", align: 'start' } },
       { element: '#btn-controls', popover: { title: 'Cheat Sheet', description: 'Click here anytime to open a quick guide of the controls without interrupting the session.', side: "top", align: 'center' } },
       { element: '#btn-mute', popover: { title: 'Mute', description: 'Find the audio distracting? You can mute the voices here.', side: "top", align: 'center' } },
-      { element: '#btn-pause', popover: { title: 'Pause', description: 'Need a break? Pause the simulation here.', side: "top", align: 'center' } },
+      { element: '#btn-pause', popover: { title: 'Pause', description: 'Need a break? Pause the simulation here. You can also press Spacebar to toggle Pause.', side: "top", align: 'center' } },
       { element: '#btn-toggle-transcript', popover: { title: 'Live Transcript', description: 'Click this button to open the conversation history at any time. It updates automatically.', side: "top", align: 'center' } },
-      { element: '#btn-prev', popover: { title: 'Previous', description: 'Missed something? Step backward through the dialogue line-by-line.', side: "top", align: 'center' } },
-      { element: '#btn-next', popover: { title: 'Advance', description: 'Advance the dialogue manually. You can also press Spacebar or Right Arrow.', side: "top", align: 'center' } }
+      { element: '#btn-prev', popover: { title: 'Previous', description: 'Missed something? Step backward through the dialogue line-by-line. You can also press the Left Arrow key.', side: "top", align: 'center' } },
+      { element: '#btn-next', popover: { title: 'Advance', description: 'Advance the dialogue manually. You can also press the Right Arrow key.', side: "top", align: 'center' } }
     ]
   });
 
@@ -331,13 +346,15 @@ function advanceNext() {
   if (isPaused) return;
 
   if (!els.hudOverlay.classList.contains('hidden')) {
-    const node = scenario.nodes[currentNodeId];
-    if (node && node.type === 'choice') {
-      els.hudOverlay.classList.add('hidden');
-      isGoingBack = false;
-      playNode(node.nextNode);
+    const hasAttempted = els.hudCard.querySelector('.btn-continue-dynamic') !== null;
+    if (!hasAttempted) {
+      showNotification("Please answer the question before continuing.");
+      return;
+    } else {
+      const btnContinue = els.hudCard.querySelector('.btn-continue-dynamic');
+      if (btnContinue) btnContinue.click();
+      return;
     }
-    return;
   }
 
   if (!currentPlayingNode && !isWaitingForNext) return;
@@ -482,8 +499,8 @@ function fallbackSpeak(node, isPatient, onEnd) {
 }
 
 function playNode(nodeId) {
-  if (nodeId === 'end') {
-    endSimulation();
+  if (!nodeId || nodeId === 'end') {
+    showAssessmentScreen();
     return;
   }
 
@@ -533,8 +550,10 @@ function playNode(nodeId) {
     if (node.image) {
       els.therapistVideo.src = node.image;
     } else {
-      therapistImageIndex = (therapistImageIndex + 1) % therapistTalkingImages.length;
-      els.therapistVideo.src = therapistTalkingImages[therapistImageIndex];
+      const nodeNumMatch = nodeId.match(/\d+/);
+      const nodeNum = nodeNumMatch ? parseInt(nodeNumMatch[0], 10) : 0;
+      const index = nodeNum % therapistTalkingImages.length;
+      els.therapistVideo.src = therapistTalkingImages[index];
     }
   } else if (node.type === 'patient' && els.therapistVideo) {
     els.therapistVideo.src = 'therapist_listening.jpg'; // listening when patient speaks
@@ -643,30 +662,24 @@ function showChoices(node) {
 
     checkboxes.forEach(i => i.cb.disabled = true);
 
-    if (!allCorrectSelected || anyIncorrectSelected) {
-      els.btnSubmitHud.textContent = 'Try Again';
-      els.btnSubmitHud.classList.replace('primary', 'secondary');
-      hasSubmitted = false;
-    } else {
-      els.btnSubmitHud.textContent = 'Try Again';
-      els.btnSubmitHud.classList.replace('primary', 'secondary');
+    els.btnSubmitHud.textContent = 'Try Again';
+    els.btnSubmitHud.classList.replace('primary', 'secondary');
 
-      const existingContinue = els.hudCard.querySelector('.btn-continue-dynamic');
-      if (!existingContinue) {
-        const btnContinue = document.createElement('button');
-        btnContinue.className = 'btn primary mt-4 btn-continue-dynamic';
-        btnContinue.style.marginLeft = '10px';
-        btnContinue.textContent = 'Continue';
-        btnContinue.onclick = () => {
-          els.hudOverlay.classList.add('hidden');
-          btnContinue.remove();
-          isGoingBack = false;
-          playNode(node.nextNode);
-        };
-        els.btnSubmitHud.parentNode.insertBefore(btnContinue, els.btnSubmitHud.nextSibling);
-      }
-      hasSubmitted = false;
+    const existingContinue = els.hudCard.querySelector('.btn-continue-dynamic');
+    if (!existingContinue) {
+      const btnContinue = document.createElement('button');
+      btnContinue.className = 'btn primary mt-4 btn-continue-dynamic';
+      btnContinue.style.marginLeft = '10px';
+      btnContinue.textContent = 'Continue';
+      btnContinue.onclick = () => {
+        els.hudOverlay.classList.add('hidden');
+        btnContinue.remove();
+        isGoingBack = false;
+        playNode(node.nextNode);
+      };
+      els.btnSubmitHud.parentNode.insertBefore(btnContinue, els.btnSubmitHud.nextSibling);
     }
+    hasSubmitted = false;
   });
 
   els.hudOverlay.classList.remove('hidden');
@@ -708,6 +721,74 @@ function endSimulation() {
   els.hudOverlay.classList.add('hidden');
   generateFinalAssessment();
   els.finalScreen.classList.remove('hidden');
+}
+
+function showFinalScreen() {
+  els.hudOverlay.classList.add('hidden');
+  els.callUI.classList.add('hidden');
+  els.finalScreen.classList.remove('hidden');
+}
+
+function showAssessmentScreen() {
+  els.hudOverlay.classList.add('hidden');
+  els.callUI.classList.add('hidden');
+  els.assessmentScreen.classList.remove('hidden');
+  
+  const btnSubmitQ1 = document.getElementById('btn-submit-q1');
+  const btnFinishAssessment = document.getElementById('btn-finish-assessment');
+
+  if (btnSubmitQ1) {
+    btnSubmitQ1.onclick = () => {
+      btnSubmitQ1.disabled = true;
+      btnSubmitQ1.textContent = 'Saved';
+    };
+  }
+
+  if (btnFinishAssessment) {
+    btnFinishAssessment.onclick = () => {
+      els.assessmentScreen.classList.add('hidden');
+      showFinalScreen();
+    };
+  }
+}
+
+let activeToastTimeout = null;
+let activeToastRemoveTimeout = null;
+
+function showNotification(message) {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  let toast = container.querySelector('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    container.appendChild(toast);
+  }
+
+  toast.innerHTML = `<strong>Attention:</strong> ${message}`;
+  
+  // Clear existing timeouts to reset the timer
+  if (activeToastTimeout) clearTimeout(activeToastTimeout);
+  if (activeToastRemoveTimeout) clearTimeout(activeToastRemoveTimeout);
+
+  // Trigger reflow to start transition
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  // Remove after 3 seconds
+  activeToastTimeout = setTimeout(() => {
+    toast.classList.remove('show');
+    activeToastRemoveTimeout = setTimeout(() => {
+      toast.remove();
+    }, 300);
+  }, 3000);
 }
 
 // Pre-load voices

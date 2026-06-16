@@ -1,50 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CBT Simulation: Sarah</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
-</head>
-<body>
-  <!-- Start Screen -->
-  <div id="start-screen" class="overlay">
-    <div class="card">
-      <h1>Simulation Module: CBT Basics</h1>
-      <p>Patient: Sarah (Anxiety & Work Stress)</p>
-      <button id="btn-start" class="btn primary">Start Module</button>
-    </div>
-  </div>
+import re
 
-  <!-- Intro Screen -->
-  <div id="intro-screen" class="overlay hidden">
-    <div class="wide-card">
-      <h1 style="text-align: center; margin-bottom: 2rem;">Simulation Module: CBT Basics</h1>
-      
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-        <div>
-          <h2 style="color: var(--accent-blue); margin-bottom: 1rem; font-size: 1.25rem;">Scenario Introduction</h2>
-          <p>You are stepping into the role of a cognitive-behavioral therapist. Your patient, Sarah, is a 28-year-old marketing professional who has been experiencing significant distress related to her work performance.</p>
-          <p style="margin-top: 1rem;">In recent weeks, she has been reporting high levels of anxiety, self-doubt, and fear of failure, particularly after receiving feedback from her supervisor.</p>
-        </div>
-        <div>
-          <h2 style="color: var(--accent-green); margin-bottom: 1rem; font-size: 1.25rem;">Learning Objectives</h2>
-          <ul class="tour-list" style="margin-bottom: 0; text-align: left;">
-            <li>Identify automatic negative thoughts and cognitive distortions.</li>
-            <li>Apply Socratic questioning to explore the patient's rigid belief systems.</li>
-            <li>Guide the patient toward cognitive restructuring and evidence examination.</li>
-            <li>Assign appropriate behavioral homework (e.g., thought record).</li>
-          </ul>
-        </div>
-      </div>
-
-      <div style="text-align: center;">
-        <button id="btn-continue-intro" class="btn primary" style="font-size: 1.1rem; padding: 0.75rem 2rem;">Continue to Simulation</button>
-      </div>
-    </div>
-  </div>
-
+html_content = """
   <!-- Assessment Screen -->
   <div id="assessment-screen" class="overlay hidden">
     <div class="wide-card" style="max-width: 800px; text-align: left; max-height: 90vh; overflow-y: auto;">
@@ -153,146 +109,13 @@
       </div>
     </div>
   </div>
+"""
 
-  <!-- Controls Side Panel -->
-  <aside id="controls-panel" class="side-panel hidden">
-    <div class="panel-header">
-      <h2>Navigation & Controls Guide</h2>
-      <button id="btn-close-controls" class="btn-icon">×</button>
-    </div>
-    <div class="panel-content">
-      <ul class="tour-list" style="list-style: none; padding-left: 0;">
-        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
-          <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">ℹ️ Controls</button>
-          <div><strong>Navigation & Controls Guide:</strong> Click this button to reopen this cheat sheet at any time.</div>
-        </li>
-        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
-          <div style="display: flex; gap: 5px;">
-            <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">🔊 Mute</button>
-            <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">⏸ Pause</button>
-          </div>
-          <div><strong>Audio Controls:</strong> Mute the voice generation if you find it distracting, or Pause the simulation (or use Spacebar) to freeze the timer and dialogue.</div>
-        </li>
-        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
-          <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">📄 Transcript</button>
-          <div><strong>Live Transcript:</strong> Click to view the full conversation history. It updates automatically in real-time.</div>
-        </li>
-        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
-          <div style="display: flex; gap: 5px;">
-            <button class="btn secondary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">⏮ Previous</button>
-            <button class="btn primary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">Next ⏭</button>
-          </div>
-          <div><strong>Manual Navigation:</strong> The dialogue advances manually. Click these buttons (or use Arrow Keys) to step forward or backward through the session.</div>
-        </li>
-        <li style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 5px;">
-          <button class="btn primary" style="pointer-events: none; padding: 0.3rem 0.6rem; font-size: 0.8rem; white-space: nowrap; width: fit-content;">Submit Response</button>
-          <div><strong>Interactive Decisions:</strong> At key clinical moments, the session will pause. You must select the best CBT response to continue.</div>
-        </li>
-      </ul>
-    </div>
-  </aside>
+with open('index.html', 'r') as f:
+    content = f.read()
 
-  <!-- Main Call UI -->
-  <div id="call-ui" class="hidden">
-    <header class="call-header">
-      <div class="session-info">Session Time: <span id="time-display">00:00</span></div>
-      <div class="progress-container">
-        <div class="progress-label">Simulation Progress: <span id="progress-text">0%</span></div>
-        <div class="progress-bar-bg">
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-      </div>
-      <div class="session-title">Encrypted Video Call</div>
-    </header>
+pattern = r'<!-- Assessment Screen -->.*?</div>\n    </div>\n  </div>'
+new_content = re.sub(pattern, html_content.strip(), content, flags=re.DOTALL)
 
-    <div class="main-layout">
-      <!-- Transcript Side Panel (moved to left) -->
-      <aside id="transcript-panel" class="hidden">
-        <div class="transcript-header">
-          <h3>Session Transcript</h3>
-          <button id="btn-close-transcript" class="btn-icon">×</button>
-        </div>
-        <div id="transcript-content" class="transcript-content">
-          <!-- Populated dynamically -->
-        </div>
-      </aside>
-
-      <div class="video-area" style="position: relative; flex: 1; display: flex; flex-direction: column;">
-        <main class="video-grid">
-          <!-- Therapist Video -->
-          <div id="therapist-container" class="video-container">
-            <img src="therapist.jpg" alt="Therapist Video Feed" class="video-feed">
-            <div class="video-overlay">
-              <span class="name-tag">Therapist (You)</span>
-              <div class="audio-wave">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Patient Video -->
-          <div id="patient-container" class="video-container">
-            <img id="patient-video" src="sarah.jpg" alt="Patient Video Feed" class="video-feed">
-            <div class="video-overlay">
-              <span class="name-tag">Sarah</span>
-              <span id="patient-mood-badge" class="mood-badge hidden">Mood: Neutral</span>
-              <div class="audio-wave">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-              </div>
-            </div>
-          </div>
-        </main>
-
-        <!-- Glassmorphic Quiz HUD -->
-        <div id="hud-overlay" class="overlay glass hidden">
-          <div class="hud-card">
-            <h2 id="hud-title">Response Required</h2>
-            <p id="hud-prompt">What is your response to Sarah?</p>
-            <div id="hud-options" class="options-container">
-              <!-- Options generated via JS -->
-            </div>
-            <button id="btn-submit-hud" class="btn primary mt-4 hidden">Submit Response</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer class="call-footer">
-      <button id="btn-controls" class="btn secondary icon-btn" title="View Controls">ℹ️ Controls</button>
-      <button id="btn-mute" class="btn secondary icon-btn" title="Mute Audio">🔊 Mute</button>
-      <button id="btn-pause" class="btn secondary icon-btn" title="Pause Session (Space)">⏸ Pause</button>
-      <button id="btn-toggle-transcript" class="btn secondary icon-btn" title="View Transcript">📄 Transcript</button>
-      <button id="btn-prev" class="btn secondary" title="Previous (Arrow Left)">⏮ Previous</button>
-      <button id="btn-next" class="btn primary" title="Next (Arrow Right)">Next ⏭</button>
-    </footer>
-  </div>
-
-  <!-- Final Score / Reflection Screen -->
-  <div id="final-screen" class="overlay glass hidden">
-    <div class="card wide-card final-scrollable">
-      <h2>Session Complete</h2>
-      <p id="final-feedback">You successfully helped Sarah challenge her rigid beliefs.</p>
-      
-      <div id="final-assessment" class="final-assessment">
-        <!-- Final Assessment questions injected here -->
-      </div>
-
-      <div class="reflection-section">
-        <label for="reflection-pad">Student Clinical Reflection Notes</label>
-        <textarea id="reflection-pad" rows="4" placeholder="Type your professional takeaways from this session here..."></textarea>
-      </div>
-      
-      <button class="btn primary" onclick="window.print()">Save Transcript</button>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+with open('index.html', 'w') as f:
+    f.write(new_content)

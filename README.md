@@ -25,6 +25,16 @@ This project has been extensively upgraded with premium UI/UX features and dynam
   * Successful answers provide dual branching options: "Try Again" (to explore other feedback) or "Continue".
   * Navigation buttons gracefully suspend and bypass the quiz overlay if the user decides to navigate away.
 
+### ⚡ Advanced Interactivity & Keyboard Shortcuts
+* **Power User Navigation:** Full keyboard shortcut support. Users can press **Left/Right Arrows** to jump between dialogue nodes, and the **Spacebar** to toggle Play/Pause, keeping the simulation fluid and accessible.
+* **Select-All-That-Apply:** Knowledge checks now natively support complex multi-select answers, instantly adapting into checkbox layouts for nuanced clinical questions.
+* **Always-On "Continue":** Users can now choose to move on from a knowledge check even after reading the feedback for an incorrect choice, ensuring they are never forced into "guessing until correct."
+
+### 📝 Comprehensive Final Assessment
+* **End-of-Scenario Evaluation:** A robust 10-question assessment seamlessly integrates at the end of the simulation dialogue.
+* **Scrollable Worksheet:** Presents a clean, scrollable layout mixing open-ended self-reflection notes (that students can save) alongside a rigorous multiple-choice review of the CBT interventions used in the session.
+* **Frictionless Transition:** The video UI gracefully fades out upon dialogue completion to bring the student directly into the final review.
+
 ## Getting Started
 
 1. Clone the repository.
