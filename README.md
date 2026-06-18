@@ -37,12 +37,6 @@ This project has been extensively upgraded with premium UI/UX features and dynam
 * **Scrollable Worksheet:** Presents a clean, scrollable layout mixing open-ended self-reflection notes (that students can save) alongside a rigorous multiple-choice review of the CBT interventions used in the session.
 * **Frictionless Transition:** The video UI gracefully fades out upon dialogue completion to bring the student directly into the final review.
 
-## Getting Started
-
-1. Clone the repository.
-2. Serve the directory using any local web server (e.g., `python3 -m http.server 8081`).
-3. Open `index.html` in your browser to begin the simulation.
-
 ## ✨ Features & Experience
 
 - **🎙️ Realistic Telehealth Environment**: The UI mimics a modern video call, complete with live transcripts, audio visualization, and session timers.
