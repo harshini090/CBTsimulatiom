@@ -7,7 +7,7 @@ A state-of-the-art interactive web simulation of a Cognitive Behavioral Therapy 
 This project has been extensively upgraded with premium UI/UX features and dynamic interactions:
 
 ### 🌟 Premium UI / UX
-* **Interactive Guided Tour:** Uses `driver.js` to provide an automatic, step-by-step spotlight tour of the interface when the module starts.
+* **Interactive Guided Tour:** Uses `driver.js` to provide an automatic, step-by-step spotlight tour of the interface. Clicking the background seamlessly advances the tour, while clicking the "X" button stops the tutorial to jump straight into the simulation.
 * **Glassmorphic Design:** Sleek, modern styling featuring frosted glass overlays for the quizzes, controls cheat-sheet, and transcript panels.
 * **Smooth Animations:** Side panels smoothly slide in and out of the view. The live transcript features a sophisticated fade-in animation exclusively for the newest, ongoing dialogue while maintaining instant rendering for historical messages.
 * **Unobtrusive Overlays:** The transcript panel is docked cleanly to the left so it remains readable even while answering quizzes.
@@ -17,6 +17,7 @@ This project has been extensively upgraded with premium UI/UX features and dynam
 * **Contextual Expressions:** Characters dynamically change their facial expressions based on the dialogue context. The project utilizes a library of AI-generated expressions (e.g., disappointed, irritated, hesitant, kind).
 * **Smart State Retention:** The patient's emotional expression visually persists in the UI even while the therapist is speaking, providing realistic emotional continuity. 
 * **Dynamic Talking Loops:** The therapist's video feed loops through specifically generated active speaking expressions (warm, serious, standard) during their turn, rather than defaulting to static or listening faces.
+* **Precision Avatar Cropping:** Automated background cropping ensures all AI-generated patient avatars seamlessly integrate into the UI without distracting dark borders. All media assets were upgraded to PNG to eliminate rendering artifacts and support transparency.
 
 ### 🎮 Robust Navigation & Quiz Flow
 * **Non-Linear Navigation:** Fully functional "Previous" and "Next" buttons allow students to navigate backward and forward through the conversation. The transcript accurately rebuilds itself dynamically based on the current history point.
@@ -27,6 +28,7 @@ This project has been extensively upgraded with premium UI/UX features and dynam
 
 ### ⚡ Advanced Interactivity & Keyboard Shortcuts
 * **Power User Navigation:** Full keyboard shortcut support. Users can press **Left/Right Arrows** to jump between dialogue nodes, and the **Spacebar** to toggle Play/Pause, keeping the simulation fluid and accessible.
+* **Smart Keyboard Safeguards:** Keyboard navigation automatically disables when interacting with popups, feedback modals, or end screens, preventing users from accidentally skipping content or triggering hidden audio while reading.
 * **Select-All-That-Apply:** Knowledge checks now natively support complex multi-select answers, instantly adapting into checkbox layouts for nuanced clinical questions.
 * **Always-On "Continue":** Users can now choose to move on from a knowledge check even after reading the feedback for an incorrect choice, ensuring they are never forced into "guessing until correct."
 
