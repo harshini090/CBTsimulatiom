@@ -237,6 +237,10 @@ function startTour() {
 
   const driverObj = window.driver.js.driver({
     showProgress: true,
+    onCloseClick: () => {
+      driverObj.destroy();
+      if (!timerInterval) startSimulation();
+    },
     onDestroyStarted: () => {
       if (driverObj.hasNextStep()) {
         driverObj.moveNext();
