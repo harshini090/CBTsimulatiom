@@ -47,7 +47,7 @@
 
   <!-- Assessment Screen -->
   <div id="assessment-screen" class="overlay hidden">
-    <div class="wide-card" style="max-width: 800px; text-align: left; max-height: 90vh; overflow-y: auto;">
+    <div class="wide-card" style="max-width: 800px; text-align: left; max-height: 90vh; overflow-y: auto; position: relative;">
       <h1 style="text-align: center; margin-bottom: 2rem;">End of Scenario Assessment</h1>
       
       <div class="assessment-question" id="q1-container">
@@ -235,7 +235,7 @@
 
           <!-- Patient Video -->
           <div id="patient-container" class="video-container">
-            <img id="patient-video" src="sarah.jpg" alt="Patient Video Feed" class="video-feed">
+            <img id="patient-video" src="sarah.png" alt="Patient Video Feed" class="video-feed">
             <div class="video-overlay">
               <span class="name-tag">Sarah</span>
               <span id="patient-mood-badge" class="mood-badge hidden">Mood: Neutral</span>
@@ -275,7 +275,7 @@
 
   <!-- Final Score / Reflection Screen -->
   <div id="final-screen" class="overlay glass hidden">
-    <div class="card wide-card final-scrollable">
+    <div class="card wide-card final-scrollable" style="position: relative;">
       <h2>Session Complete</h2>
       <p id="final-feedback">You successfully helped Sarah challenge her rigid beliefs.</p>
       
@@ -287,8 +287,33 @@
         <label for="reflection-pad">Student Clinical Reflection Notes</label>
         <textarea id="reflection-pad" rows="4" placeholder="Type your professional takeaways from this session here..."></textarea>
       </div>
-      
-      <button class="btn primary" onclick="window.print()">Save Transcript</button>
+      <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+        <button class="btn secondary" onclick="window.location.reload()">Try Again</button>
+        <button class="btn primary" onclick="window.print()">Save Transcript</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Dialogue Modal -->
+  <div id="end-dialogue-modal" class="overlay glass hidden" style="z-index: 2000;">
+    <div class="card" style="text-align: center; padding: 2rem;">
+      <h3 style="margin-bottom: 1.5rem;">The session dialogue has concluded.</h3>
+      <p style="margin-bottom: 2rem;">Would you like to review the session transcript and navigation, or proceed to the assessment?</p>
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button id="btn-review-session" class="btn secondary">Review Session</button>
+        <button id="btn-go-to-assessment" class="btn primary">Go to Assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Session Confirm Modal -->
+  <div id="back-confirm-modal" class="overlay glass hidden" style="z-index: 2000;">
+    <div class="card" style="text-align: center; padding: 2rem;">
+      <h3 style="margin-bottom: 1.5rem;">Do you want to go back to the session?</h3>
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button id="btn-confirm-back-yes" class="btn primary">Yes</button>
+        <button id="btn-confirm-back-no" class="btn secondary">No</button>
+      </div>
     </div>
   </div>
 

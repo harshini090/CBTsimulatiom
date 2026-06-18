@@ -209,8 +209,6 @@ p { line-height: 1.5; margin-bottom: 1rem; color: var(--text-secondary); }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.15);
-  transform-origin: top center;
 }
 
 .video-overlay {

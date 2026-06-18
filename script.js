@@ -3,9 +3,9 @@ const scenario = {
   startNode: 't1',
   nodes: {
     t1: { type: 'therapist', speaker: 'Therapist', text: "Good afternoon, Sarah. How have things been since our last session?", audioPath: 'audio/d1.mp3', image: 'therapist.jpg', next: 'p1' },
-    p1: { type: 'patient', speaker: 'Sarah', text: "It’s been a rough week. I keep thinking I’m failing at work. Every small mistake feels huge.", audioPath: 'audio/p1.mp3', image: 'sarah_sad.jpg', moodText: 'Overwhelmed', next: 't2' },
+    p1: { type: 'patient', speaker: 'Sarah', text: "It’s been a rough week. I keep thinking I’m failing at work. Every small mistake feels huge.", audioPath: 'audio/p1.mp3', image: 'sarah_disappointed.png', moodText: 'Overwhelmed', next: 't2' },
     t2: { type: 'therapist', speaker: 'Therapist', text: "Can you walk me through a recent situation where you felt that way?", audioPath: 'audio/t2.mp3', next: 'p2' },
-    p2: { type: 'patient', speaker: 'Sarah', text: "Yesterday my supervisor corrected part of a report I submitted. After that, I couldn’t stop thinking, “I’m terrible at my job.”", audioPath: 'audio/p2.mp3', image: 'sarah_sad.jpg', moodText: 'Ashamed', next: 'q1' },
+    p2: { type: 'patient', speaker: 'Sarah', text: "Yesterday my supervisor corrected part of a report I submitted. After that, I couldn’t stop thinking, “I’m terrible at my job.”", audioPath: 'audio/p2.mp3', image: 'sarah_zoom_ashamed.png', moodText: 'Ashamed', next: 'q1' },
 
     q1: {
       type: 'choice',
@@ -20,9 +20,9 @@ const scenario = {
     },
 
     t3: { type: 'therapist', speaker: 'Therapist', text: "When that thought came up — “I’m terrible at my job” — how intense was your anxiety from 0 to 10?", audioPath: 'audio/t3.mp3', next: 'p3' },
-    p3: { type: 'patient', speaker: 'Sarah', text: "Probably an 8.", audioPath: 'audio/p3.mp3', image: 'sarah_anxious.jpg', moodText: 'Anxious', next: 't4' },
+    p3: { type: 'patient', speaker: 'Sarah', text: "Probably an 8.", audioPath: 'audio/p3.mp3', image: 'sarah_anxious.png', moodText: 'Anxious', next: 't4' },
     t4: { type: 'therapist', speaker: 'Therapist', text: "And what emotions did you notice besides anxiety?", audioPath: 'audio/t4.mp3', next: 'p4' },
-    p4: { type: 'patient', speaker: 'Sarah', text: "Shame. Embarrassment. I also felt hopeless.", audioPath: 'audio/p4.mp3', image: 'sarah_sad.jpg', moodText: 'Hopeless', next: 'q2' },
+    p4: { type: 'patient', speaker: 'Sarah', text: "Shame. Embarrassment. I also felt hopeless.", audioPath: 'audio/p4.mp3', image: 'sarah_zoom_ashamed.png', moodText: 'Hopeless', next: 'q2' },
 
     q2: {
       type: 'choice',
@@ -37,13 +37,13 @@ const scenario = {
     },
 
     t5: { type: 'therapist', speaker: 'Therapist', text: "Let’s slow the moment down. Your supervisor corrected part of your report. What evidence did your mind use to conclude that you’re terrible at your job?", audioPath: 'audio/t5.mp3', image: 'therapist_speaking.jpg', next: 'p5' },
-    p5: { type: 'patient', speaker: 'Sarah', text: "Well… the report had errors.", audioPath: 'audio/p5.mp3', image: 'sarah_sad.jpg', moodText: 'Defeated', next: 't6' },
+    p5: { type: 'patient', speaker: 'Sarah', text: "Well… the report had errors.", audioPath: 'audio/p5.mp3', image: 'sarah_disappointed.png', moodText: 'Defeated', next: 't6' },
     t6: { type: 'therapist', speaker: 'Therapist', text: "Okay. Were there any facts that might not support the conclusion?", audioPath: 'audio/t6.mp3', next: 'p6' },
-    p6: { type: 'patient', speaker: 'Sarah', text: "I guess the rest of the report was fine. And my supervisor said the corrections were “minor.”", audioPath: 'audio/p6.mp3', image: 'sarah.jpg', moodText: 'Neutral', next: 't7' },
+    p6: { type: 'patient', speaker: 'Sarah', text: "I guess the rest of the report was fine. And my supervisor said the corrections were “minor.”", audioPath: 'audio/p6.mp3', image: 'sarah_zoom_neutral.png', moodText: 'Neutral', next: 't7' },
     t7: { type: 'therapist', speaker: 'Therapist', text: "That’s important. Sometimes our thoughts jump from “I made a mistake” to “I’m incompetent.” That’s a cognitive distortion called overgeneralization. Does that fit what happened?", audioPath: 'audio/t7.mp3', next: 'p7' },
-    p7: { type: 'patient', speaker: 'Sarah', text: "Yeah, definitely. I turned one mistake into proof that I’m a failure.", audioPath: 'audio/p7.mp3', image: 'sarah_sad.jpg', moodText: 'Reflective', next: 't8' },
+    p7: { type: 'patient', speaker: 'Sarah', text: "Yeah, definitely. I turned one mistake into proof that I’m a failure.", audioPath: 'audio/p7.mp3', image: 'sarah_zoom_reflective.png', moodText: 'Reflective', next: 't8' },
     t8: { type: 'therapist', speaker: 'Therapist', text: "If a coworker made the same mistake, would you think they were terrible at their job?", audioPath: 'audio/t8.mp3', next: 'p8' },
-    p8: { type: 'patient', speaker: 'Sarah', text: "No. I’d probably think they were just human.", audioPath: 'audio/p8.mp3', image: 'sarah_kind.jpg', moodText: 'Empathetic', next: 'q3' },
+    p8: { type: 'patient', speaker: 'Sarah', text: "No. I’d probably think they were just human.", audioPath: 'audio/p8.mp3', image: 'sarah_zoom_empathetic.png', moodText: 'Empathetic', next: 'q3' },
 
     q3: {
       type: 'choice',
@@ -58,9 +58,9 @@ const scenario = {
     },
 
     t9: { type: 'therapist', speaker: 'Therapist', text: "What makes it harder to apply that same standard to yourself?", audioPath: 'audio/t9.mp3', next: 'p9' },
-    p9: { type: 'patient', speaker: 'Sarah', text: "I feel like I’m supposed to be perfect all the time.", audioPath: 'audio/p9.mp3', image: 'sarah_anxious.jpg', moodText: 'Stressed', next: 't10' },
+    p9: { type: 'patient', speaker: 'Sarah', text: "I feel like I’m supposed to be perfect all the time.", audioPath: 'audio/p9.mp3', image: 'sarah_anxious.png', moodText: 'Stressed', next: 't10' },
     t10: { type: 'therapist', speaker: 'Therapist', text: "That sounds like a very rigid rule. Where do you think that expectation comes from?", audioPath: 'audio/t10.mp3', next: 'p10' },
-    p10: { type: 'patient', speaker: 'Sarah', text: "Growing up, mistakes weren’t really tolerated in my house. My parents focused a lot on achievement.", audioPath: 'audio/p10.mp3', image: 'sarah_hesitant.jpg', moodText: 'Vulnerable', next: 'q4' },
+    p10: { type: 'patient', speaker: 'Sarah', text: "Growing up, mistakes weren’t really tolerated in my house. My parents focused a lot on achievement.", audioPath: 'audio/p10.mp3', image: 'sarah_zoom_vulnerable.png', moodText: 'Vulnerable', next: 'q4' },
 
     q4: {
       type: 'choice',
@@ -75,9 +75,9 @@ const scenario = {
     },
 
     t11: { type: 'therapist', speaker: 'Therapist', text: "That history can shape automatic beliefs. Let’s try reframing the original thought. Instead of “I’m terrible at my job,” what might be a more balanced statement?", audioPath: 'audio/t11.mp3', next: 'p11' },
-    p11: { type: 'patient', speaker: 'Sarah', text: "Maybe… “I made a mistake, but that doesn’t mean I’m bad at my job.”", audioPath: 'audio/p11.mp3', image: 'sarah.jpg', moodText: 'Thinking', next: 't12' },
+    p11: { type: 'patient', speaker: 'Sarah', text: "Maybe… “I made a mistake, but that doesn’t mean I’m bad at my job.”", audioPath: 'audio/p11.mp3', image: 'sarah_zoom_reflective.png', moodText: 'Thinking', next: 't12' },
     t12: { type: 'therapist', speaker: 'Therapist', text: "How believable does that feel right now, from 0 to 100 percent?", audioPath: 'audio/t12.mp3', next: 'p12' },
-    p12: { type: 'patient', speaker: 'Sarah', text: "Around 60 percent.", audioPath: 'audio/p12.mp3', image: 'sarah.jpg', moodText: 'Uncertain', next: 'q5' },
+    p12: { type: 'patient', speaker: 'Sarah', text: "Around 60 percent.", audioPath: 'audio/p12.mp3', image: 'sarah_zoom_vulnerable.png', moodText: 'Uncertain', next: 'q5' },
 
     q5: {
       type: 'choice',
@@ -92,11 +92,11 @@ const scenario = {
     },
 
     t13: { type: 'therapist', speaker: 'Therapist', text: "That’s a good start. What happens to your anxiety level when you say the balanced thought?", audioPath: 'audio/t13.mp3', next: 'p13' },
-    p13: { type: 'patient', speaker: 'Sarah', text: "It drops to maybe a 4.", audioPath: 'audio/p13.mp3', image: 'sarah_relieved.jpg', moodText: 'Relieved', next: 't14' },
+    p13: { type: 'patient', speaker: 'Sarah', text: "It drops to maybe a 4.", audioPath: 'audio/p13.mp3', image: 'sarah_zoom_relieved.png', moodText: 'Relieved', next: 't14' },
     t14: { type: 'therapist', speaker: 'Therapist', text: "Great. That tells us the thought itself is influencing the emotional reaction. For homework this week, I’d like you to keep a thought record. When you notice strong self-criticism, write down: 1. The situation 2. The automatic thought 3. The emotion and intensity 4. Evidence for and against the thought 5. A more balanced replacement thought.", audioPath: 'audio/t14.mp3', next: 'p14' },
-    p14: { type: 'patient', speaker: 'Sarah', text: "Okay, I can do that.", audioPath: 'audio/p14.mp3', image: 'sarah_relieved.jpg', moodText: 'Determined', next: 't15' },
+    p14: { type: 'patient', speaker: 'Sarah', text: "Okay, I can do that.", audioPath: 'audio/p14.mp3', image: 'sarah_zoom_neutral.png', moodText: 'Determined', next: 't15' },
     t15: { type: 'therapist', speaker: 'Therapist', text: "Before we end, what’s one thing you’re taking away from today’s session?", audioPath: 'audio/t15.mp3', next: 'p15' },
-    p15: { type: 'patient', speaker: 'Sarah', text: "I think I realized I treat my mistakes as proof that something is wrong with me, instead of seeing them as normal.", audioPath: 'audio/p15.mp3', image: 'sarah_relieved.jpg', moodText: 'Relieved', next: 'q6' },
+    p15: { type: 'patient', speaker: 'Sarah', text: "I think I realized I treat my mistakes as proof that something is wrong with me, instead of seeing them as normal.", audioPath: 'audio/p15.mp3', image: 'sarah_zoom_relieved.png', moodText: 'Relieved', next: 'q6' },
 
     q6: {
       type: 'choice',
@@ -111,7 +111,7 @@ const scenario = {
     },
 
     t16: { type: 'therapist', speaker: 'Therapist', text: "That’s an important insight. We’ll continue working on challenging those perfectionistic beliefs next session.", audioPath: 'audio/t16.mp3', next: 'p16' },
-    p16: { type: 'patient', speaker: 'Sarah', text: "Thank you. This actually feels helpful.", audioPath: 'audio/p16.mp3', image: 'sarah_smiling.jpg', moodText: 'Hopeful', next: 't17' },
+    p16: { type: 'patient', speaker: 'Sarah', text: "Thank you. This actually feels helpful.", audioPath: 'audio/p16.mp3', image: 'sarah_zoom_hopeful.png', moodText: 'Hopeful', next: 't17' },
     t17: { type: 'therapist', speaker: 'Therapist', text: "I’m glad to hear that. See you next week.", audioPath: 'audio/t17.mp3', image: 'therapist_smiling.jpg', next: 'end' }
   }
 };
@@ -167,7 +167,15 @@ const els = {
   hudPrompt: document.getElementById('hud-prompt'),
   hudOptions: document.getElementById('hud-options'),
   btnSubmitHud: document.getElementById('btn-submit-hud'),
-  finalAssessment: document.getElementById('final-assessment')
+  finalAssessment: document.getElementById('final-assessment'),
+  btnBackToSession: document.getElementById('btn-back-to-session'),
+  btnBackToSessionFinal: document.getElementById('btn-back-to-session-final'),
+  backConfirmModal: document.getElementById('back-confirm-modal'),
+  btnConfirmBackYes: document.getElementById('btn-confirm-back-yes'),
+  btnConfirmBackNo: document.getElementById('btn-confirm-back-no'),
+  endDialogueModal: document.getElementById('end-dialogue-modal'),
+  btnReviewSession: document.getElementById('btn-review-session'),
+  btnGoToAssessment: document.getElementById('btn-go-to-assessment')
 };
 
 const therapistTalkingImages = ['therapist_speaking.jpg', 'therapist_talking_warm.jpg', 'therapist_talking_serious.jpg'];
@@ -184,18 +192,35 @@ els.btnCloseTranscript.addEventListener('click', () => toggleTranscript(false));
 els.btnNext.addEventListener('click', advanceNext);
 els.btnPrev.addEventListener('click', advancePrevious);
 
+if (els.btnReviewSession) els.btnReviewSession.addEventListener('click', () => {
+  els.endDialogueModal.classList.add('hidden');
+});
+if (els.btnGoToAssessment) els.btnGoToAssessment.addEventListener('click', () => {
+  els.endDialogueModal.classList.add('hidden');
+  showAssessmentScreen();
+});
+
 document.addEventListener('keydown', (e) => {
   if (!els.startScreen.classList.contains('hidden')) return;
   if (!els.introScreen.classList.contains('hidden')) return;
-  if (!els.finalScreen.classList.contains('hidden')) return;
+
+  const inAssessment = !els.assessmentScreen.classList.contains('hidden');
+  const inFinal = !els.finalScreen.classList.contains('hidden');
+  const inEndDialogue = !els.endDialogueModal.classList.contains('hidden');
+  const inHud = !els.hudOverlay.classList.contains('hidden');
+
+  const blocksNavigation = inAssessment || inFinal || inEndDialogue || inHud;
 
   if (e.code === 'ArrowRight') {
+    if (blocksNavigation) return; // Disable next on popups/end screens
     e.preventDefault();
     advanceNext();
   } else if (e.code === 'ArrowLeft') {
+    if (blocksNavigation) return; // Disable prev on popups/end screens
     e.preventDefault();
     advancePrevious();
   } else if (e.code === 'Space') {
+    if (blocksNavigation) return; // Disable pause on popups/end screens
     e.preventDefault();
     togglePause();
   }
@@ -213,8 +238,12 @@ function startTour() {
   const driverObj = window.driver.js.driver({
     showProgress: true,
     onDestroyStarted: () => {
-      driverObj.destroy();
-      if (!timerInterval) startSimulation();
+      if (driverObj.hasNextStep()) {
+        driverObj.moveNext();
+      } else {
+        driverObj.destroy();
+        if (!timerInterval) startSimulation();
+      }
     },
     steps: [
       { element: '.video-area', popover: { title: 'Video Call', description: 'This is the simulated video call with Sarah. She will react dynamically to your choices.', side: "left", align: 'start' } },
@@ -344,23 +373,22 @@ function stopAudio() {
 }
 
 function advanceNext() {
-  if (isPaused) return;
 
   if (!els.hudOverlay.classList.contains('hidden')) {
-    const hasAttempted = els.hudCard.querySelector('.btn-continue-dynamic') !== null;
-    if (!hasAttempted) {
-      showNotification("Please answer the question before continuing.");
-      return;
-    } else {
-      const btnContinue = els.hudCard.querySelector('.btn-continue-dynamic');
-      if (btnContinue) btnContinue.click();
+    if (els.btnSubmitHud.textContent === 'Continue') {
+      els.btnSubmitHud.click();
       return;
     }
+    
+    showNotification("Please select all the right answers before continuing.");
+    return;
   }
 
   if (!currentPlayingNode && !isWaitingForNext) return;
 
-
+  if (isPaused) {
+    togglePause();
+  }
 
   if (currentPlayingNode) {
     const nextId = currentPlayingNode.next;
@@ -381,10 +409,13 @@ function advanceNext() {
 }
 
 function advancePrevious() {
-  if (isPaused) return;
 
   if (!els.hudOverlay.classList.contains('hidden')) {
     els.hudOverlay.classList.add('hidden');
+  }
+
+  if (isPaused) {
+    togglePause();
   }
 
   if (nodeHistory.length > 0) {
@@ -395,6 +426,56 @@ function advancePrevious() {
     isWaitingForNext = false;
     pendingNextNode = null;
     playNode(prevId);
+  }
+}
+
+function showBackConfirmModal() {
+  els.backConfirmModal.classList.remove('hidden');
+}
+
+function confirmGoBackToSession() {
+  els.backConfirmModal.classList.add('hidden');
+  els.assessmentScreen.classList.add('hidden');
+  els.finalScreen.classList.add('hidden');
+  els.callUI.classList.remove('hidden');
+  
+  stopAudio();
+  
+  isWaitingForNext = true;
+  pendingNextNode = 'end';
+  isGoingBack = false;
+  currentPlayingNode = null;
+  
+  if (currentNodeId) {
+    const node = scenario.nodes[currentNodeId];
+    if (node) {
+      const isPatient = node.type === 'patient';
+      
+      if (els.patientVideo) {
+        els.patientVideo.src = node.type === 'patient' && node.image ? node.image : 'sarah_zoom_neutral.png';
+      }
+      if (els.patientMoodBadge) {
+        if (node.type === 'patient' && node.moodText) {
+          els.patientMoodBadge.textContent = `Mood: ${node.moodText}`;
+          els.patientMoodBadge.classList.remove('hidden');
+        } else {
+          els.patientMoodBadge.classList.add('hidden');
+        }
+      }
+      
+      if (els.therapistVideo) {
+        if (node.type === 'therapist') {
+           els.therapistVideo.src = node.image ? node.image : 'therapist_speaking.jpg';
+        } else {
+           els.therapistVideo.src = 'therapist_listening.jpg';
+        }
+      }
+      
+      els.patientContainer.classList.toggle('finished-speaker', isPatient);
+      els.therapistContainer.classList.toggle('finished-speaker', !isPatient);
+      els.patientContainer.classList.remove('active-speaker');
+      els.therapistContainer.classList.remove('active-speaker');
+    }
   }
 }
 
@@ -501,7 +582,13 @@ function fallbackSpeak(node, isPatient, onEnd) {
 
 function playNode(nodeId) {
   if (!nodeId || nodeId === 'end') {
-    showAssessmentScreen();
+    els.endDialogueModal.classList.remove('hidden');
+    
+    // Set the state so they can review the session if they choose
+    isWaitingForNext = true;
+    pendingNextNode = 'end';
+    isGoingBack = false;
+    currentPlayingNode = null;
     return;
   }
 
@@ -528,11 +615,12 @@ function playNode(nodeId) {
     }
   }
 
-  if (activePatientNode) {
+    if (activePatientNode) {
     if (activePatientNode.image && els.patientVideo) {
-      els.patientVideo.src = activePatientNode.image;
+      let imgSrc = activePatientNode.image;
+      els.patientVideo.src = imgSrc;
     } else if (els.patientVideo) {
-      els.patientVideo.src = 'sarah.jpg';
+      els.patientVideo.src = 'sarah_zoom_neutral.png';
     }
 
     if (activePatientNode.moodText && els.patientMoodBadge) {
@@ -542,7 +630,7 @@ function playNode(nodeId) {
       els.patientMoodBadge.classList.add('hidden');
     }
   } else {
-    if (els.patientVideo) els.patientVideo.src = 'sarah.jpg';
+    if (els.patientVideo) els.patientVideo.src = 'sarah_zoom_neutral.png';
     if (els.patientMoodBadge) els.patientMoodBadge.classList.add('hidden');
   }
 
@@ -576,8 +664,6 @@ function showChoices(node) {
 
   const oldFb = els.hudCard.querySelector('.feedback-text');
   if (oldFb) oldFb.remove();
-  const oldContinue = els.hudCard.querySelector('.btn-continue-dynamic');
-  if (oldContinue) oldContinue.remove();
 
   const checkboxes = [];
 
@@ -624,9 +710,6 @@ function showChoices(node) {
       });
       els.btnSubmitHud.textContent = 'Submit Response';
       els.btnSubmitHud.classList.replace('secondary', 'primary');
-
-      const existingContinue = els.hudCard.querySelector('.btn-continue-dynamic');
-      if (existingContinue) existingContinue.remove();
       return;
     }
 
@@ -664,6 +747,7 @@ function showChoices(node) {
     checkboxes.forEach(i => i.cb.disabled = true);
 
     const isFullyCorrect = allCorrectSelected && !anyIncorrectSelected;
+    const isMultiSelect = node.options.filter(o => o.isCorrect).length > 1;
 
     const overallFb = document.createElement('div');
     overallFb.className = isFullyCorrect ? 'feedback-text success' : 'feedback-text error';
@@ -695,20 +779,6 @@ function showChoices(node) {
     els.btnSubmitHud.textContent = 'Try Again';
     els.btnSubmitHud.classList.replace('primary', 'secondary');
 
-    const existingContinue = els.hudCard.querySelector('.btn-continue-dynamic');
-    if (!existingContinue) {
-      const btnContinue = document.createElement('button');
-      btnContinue.className = 'btn primary mt-4 btn-continue-dynamic';
-      btnContinue.style.marginLeft = '10px';
-      btnContinue.textContent = 'Continue';
-      btnContinue.onclick = () => {
-        els.hudOverlay.classList.add('hidden');
-        btnContinue.remove();
-        isGoingBack = false;
-        playNode(node.nextNode);
-      };
-      els.btnSubmitHud.parentNode.insertBefore(btnContinue, els.btnSubmitHud.nextSibling);
-    }
     hasSubmitted = false;
   });
 
