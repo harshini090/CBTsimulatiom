@@ -28,14 +28,14 @@ This project has been extensively upgraded with premium UI/UX features and dynam
 
 ### ⚡ Advanced Interactivity & Keyboard Shortcuts
 * **Power User Navigation:** Full keyboard shortcut support. Users can press **Left/Right Arrows** to jump between dialogue nodes, and the **Spacebar** to toggle Play/Pause, keeping the simulation fluid and accessible.
-* **Smart Keyboard Safeguards:** Keyboard navigation automatically disables when interacting with popups, feedback modals, or end screens, preventing users from accidentally skipping content or triggering hidden audio while reading.
+* **Smart Keyboard Safeguards:** Keyboard navigation automatically disables when interacting with most popups or end screens. However, users can still press the **Left Arrow** key while a knowledge check is displayed to immediately revisit the previous dialogue context without closing the popup.
 * **Select-All-That-Apply:** Knowledge checks now natively support complex multi-select answers, instantly adapting into checkbox layouts for nuanced clinical questions.
 * **Always-On "Continue":** Users can now choose to move on from a knowledge check even after reading the feedback for an incorrect choice, ensuring they are never forced into "guessing until correct."
 
 ### 📝 Comprehensive Final Assessment
-* **End-of-Scenario Evaluation:** A robust 10-question assessment seamlessly integrates at the end of the simulation dialogue.
-* **Scrollable Worksheet:** Presents a clean, scrollable layout mixing open-ended self-reflection notes (that students can save) alongside a rigorous multiple-choice review of the CBT interventions used in the session.
-* **Frictionless Transition:** The video UI gracefully fades out upon dialogue completion to bring the student directly into the final review.
+* **End-of-Scenario Evaluation:** A focused 5-question multiple-choice assessment seamlessly integrates at the end of the simulation dialogue, specifically evaluating CBT interventions, cognitive distortions, and collaborative empiricism.
+* **Strict Validation & Immediate Feedback:** Students must answer all questions before submitting. Upon submission, they receive instant, color-coded feedback (green for correct, red for incorrect) explaining why each answer is right or wrong.
+* **Frictionless Transition:** The video UI gracefully fades out upon dialogue completion to bring the student directly into the final assessment.
 
 ## ✨ Features & Experience
 

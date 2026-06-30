@@ -216,7 +216,7 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     advanceNext();
   } else if (e.code === 'ArrowLeft') {
-    if (blocksNavigation) return; // Disable prev on popups/end screens
+    if (inAssessment || inFinal || inEndDialogue) return; // Disable prev on popups/end screens, but allow on HUD
     e.preventDefault();
     advancePrevious();
   } else if (e.code === 'Space') {
@@ -790,33 +790,7 @@ function showChoices(node) {
 }
 
 function generateFinalAssessment() {
-  const content = `
-    <p><strong>Final Check:</strong> Which CBT interventions were used in this session? Select all that apply.</p>
-    <label class="option-label" style="padding: 0.75rem; margin-bottom: 0.5rem;"><input type="checkbox" class="final-cb" data-correct="true"> Identify thoughts, feelings, and behaviors involved</label>
-    <label class="option-label" style="padding: 0.75rem; margin-bottom: 0.5rem;"><input type="checkbox" class="final-cb" data-correct="true"> Challenging of unhelpful thinking patterns</label>
-    <label class="option-label" style="padding: 0.75rem; margin-bottom: 0.5rem;"><input type="checkbox" class="final-cb" data-correct="true"> Assign homework, practice exercises</label>
-    <label class="option-label" style="padding: 0.75rem; margin-bottom: 0.5rem;"><input type="checkbox" class="final-cb" data-correct="true"> Review mood and recent events</label>
-    <button id="btn-final-submit" class="btn secondary mt-4">Check Answer</button>
-    <p id="final-assessment-feedback" class="feedback-text hidden"></p>
-  `;
-  els.finalAssessment.innerHTML = content;
-
-  document.getElementById('btn-final-submit').addEventListener('click', () => {
-    const cbs = document.querySelectorAll('.final-cb');
-    let passed = true;
-    cbs.forEach(cb => {
-      if (!cb.checked) passed = false;
-    });
-    const fb = document.getElementById('final-assessment-feedback');
-    fb.classList.remove('hidden');
-    if (passed) {
-      fb.className = 'feedback-text success';
-      fb.textContent = "Correct! All of these interventions were utilized in the session.";
-    } else {
-      fb.className = 'feedback-text error';
-      fb.textContent = "Incorrect. Actually, all of these CBT interventions were demonstrated!";
-    }
-  });
+  // Assessment moved to its own screen, so this is now empty
 }
 
 function endSimulation() {
@@ -838,18 +812,81 @@ function showAssessmentScreen() {
   els.callUI.classList.add('hidden');
   els.assessmentScreen.classList.remove('hidden');
   
-  const btnSubmitQ1 = document.getElementById('btn-submit-q1');
-  const btnFinishAssessment = document.getElementById('btn-finish-assessment');
+  const btnSubmitAssessment = document.getElementById('btn-submit-assessment');
+  const btnFinishSimulation = document.getElementById('btn-finish-simulation');
 
-  if (btnSubmitQ1) {
-    btnSubmitQ1.onclick = () => {
-      btnSubmitQ1.disabled = true;
-      btnSubmitQ1.textContent = 'Saved';
+  if (btnSubmitAssessment) {
+    btnSubmitAssessment.onclick = () => {
+      // Grade answers
+      const answers = {
+        q1: { correct: ['yes'], type: 'radio', fb: "Correct: Yes. The session followed the structure of checking in, setting the agenda implicitly around the recent distress, examining evidence, cognitive restructuring, and assigning homework." },
+        q2: { correct: ['a', 'b', 'c', 'd', 'e'], type: 'checkbox', fb: "Correct: All of these interventions were utilized in the session." },
+        q3: { correct: ['b'], type: 'radio', fb: "Correct: Overgeneralization. The therapist pointed out how one mistake was generalized to being a failure." },
+        q4: { correct: ['b'], type: 'radio', fb: "Correct: To encourage perspective taking and examine double standards." },
+        q5: { correct: ['c'], type: 'radio', fb: "Correct: Asking what evidence the mind used reflects collaborative empiricism by examining the data together." }
+      };
+
+      // Check if all questions are answered
+      let allAnswered = true;
+      for (const qId of Object.keys(answers)) {
+        const container = document.getElementById(`${qId}-container`);
+        if (!container) continue;
+        const inputs = container.querySelectorAll(`input[name="${qId}"]:checked`);
+        if (inputs.length === 0) {
+          allAnswered = false;
+          break;
+        }
+      }
+
+      if (!allAnswered) {
+        showNotification("Please answer all questions before submitting.");
+        return;
+      }
+
+      let allCorrect = true;
+
+      for (const [qId, data] of Object.entries(answers)) {
+        const container = document.getElementById(`${qId}-container`);
+        if (!container) continue;
+
+        const inputs = container.querySelectorAll(`input[name="${qId}"]`);
+        const feedbackDiv = container.querySelector('.feedback-text, .feedback');
+        
+        let selected = [];
+        inputs.forEach(input => {
+          if (input.checked) selected.push(input.value);
+        });
+
+        // Check if selected matches correct
+        const isCorrect = selected.length === data.correct.length && data.correct.every(val => selected.includes(val));
+
+        if (isCorrect) {
+          feedbackDiv.className = 'feedback-text success';
+          feedbackDiv.innerHTML = data.fb;
+        } else {
+          allCorrect = false;
+          feedbackDiv.className = 'feedback-text error';
+          feedbackDiv.innerHTML = "Incorrect. " + data.fb;
+        }
+        feedbackDiv.classList.remove('hidden');
+        
+        // Disable inputs
+        inputs.forEach(input => input.disabled = true);
+      }
+
+      btnSubmitAssessment.disabled = true;
+      btnSubmitAssessment.textContent = 'Submitted';
+      
+      // Show finish button
+      if (btnFinishSimulation) {
+        btnFinishSimulation.classList.remove('hidden');
+        btnFinishSimulation.classList.replace('secondary', 'primary');
+      }
     };
   }
 
-  if (btnFinishAssessment) {
-    btnFinishAssessment.onclick = () => {
+  if (btnFinishSimulation) {
+    btnFinishSimulation.onclick = () => {
       els.assessmentScreen.classList.add('hidden');
       showFinalScreen();
     };
